@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface BuildingsService {
+public interface BuildingsServices {
     public List<Buildings> getBuildingsList();
     public Buildings getBuildingById(long id);
 }

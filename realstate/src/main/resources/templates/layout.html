@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
-    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Find Home</title>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">FindHome</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="keywords" content="Complete Online Project Management System"/>
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
@@ -25,12 +25,19 @@
     </script>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" id="bootstrap-css"/>
     <link rel="stylesheet" th:href="@{/css/atlantis.min.css}"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" th:href="@{/css/demo.css}"/>
     <!--<link rel="stylesheet" th:href="@{/css/fontawesome.min.css}"/>-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <!--for grid list view-->
+    <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+    <link rel="stylesheet" th:href="@{/css/maintablecss.css}"/>
+    <!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <div class="wrapper">

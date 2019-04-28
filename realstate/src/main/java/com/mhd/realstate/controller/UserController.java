@@ -16,7 +16,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -39,9 +38,9 @@ public class UserController {
 
     @GetMapping(value = "add")
     public String addShow(User user, Model model) {
+        model.addAttribute("user", new User());
         model.addAttribute("rolelistAdd", this.roleRepo.findAll());
         return "users/add";
-
     }
 
     @PostMapping(value = "add")
@@ -49,30 +48,22 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("rolelistAdd", this.roleRepo.findAll());
             return "users/add";
-        } else {
-            if (user != null) {
-
-                Optional<User> user1=this.userRepo.findByUserName(user.getUserName());
-                if (user1 != null) {
-                    model.addAttribute("exist", "UserName allready exist");
-
-                } else {
-                    user.setPassword(passwordEncoder.encode(user.getPassword()));
-                    user.setRegiDate(new Date());
-                    user.setEnabled(true);
-                    user.setConfirmationToken(UUID.randomUUID().toString());
-                    this.userRepo.save(user);
-                    model.addAttribute("user", new User());
-                    model.addAttribute("success", "Congratulations! Data save sucessfully");
-                }
-
-            }
         }
-        model.addAttribute("rolelistAdd", this.roleRepo.findAll());
+        if (userRepo.existsByEmail(user.getEmail())){
+            model.addAttribute("rejectMsg","Already Have this Entry");
+        }else {
+            String username = user.getEmail().split("\\@")[0];
+            user.setUserName(username);
+            user.setEnabled(true);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setConfirmationToken(UUID.randomUUID().toString());
+            this.userRepo.save(user);
+            model.addAttribute("successMsg","Successfully Send");
+        }
 
+        model.addAttribute("rolelistAdd", this.roleRepo.findAll());
         return "users/add";
     }
-
 
 
     @GetMapping(value = "list")
@@ -82,13 +73,11 @@ public class UserController {
     }
 
 
-
     @GetMapping(value = "edit/{id}")
-    public String editShow(Model model, @PathVariable("id") Long id){
+    public String editShow(Model model, @PathVariable("id") Long id) {
         model.addAttribute("user", this.userRepo.getOne(id));
         model.addAttribute("rolelistAdd", this.roleRepo.findAll());
         return "users/edit";
-
     }
 
 
@@ -98,47 +87,40 @@ public class UserController {
             model.addAttribute("rolelistAdd", this.roleRepo.findAll());
             return "users/edit";
         }
+        User u = this.userRepo.getOne(id);
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setMobile(user.getMobile());
         try {
             //////////////////////For Image Upload start /////////////////////
             byte[] bytes = file.getBytes();
             Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-
             Files.write(path, bytes);
             user.setFileName("new-" + file.getOriginalFilename());
             user.setFileSize(file.getSize());
             // user.setFile(file.getBytes());
-            user.setFilePath("images/" + "new-" + file.getOriginalFilename());
+            user.setFilePath("/images/" + "new-" + file.getOriginalFilename());
             user.setFileExtension(file.getContentType());
             //////////////////////For Image Upload end/////////////////////
-
-            this.userRepo.save(user);
+            this.userRepo.save(u);
             model.addAttribute("user", new User());
             model.addAttribute("success", "Congratulations! Data save sucessfully");
             imageOptimizer.optimizeImage(UPLOADED_FOLDER, file, 0.3f, 100, 100);
-
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-
         }
-
         model.addAttribute("rolelistAdd", this.roleRepo.findAll());
-
-        return "users/edit";
+        return "redirect:/user/list";
     }
-
-
 
 
     @GetMapping(value = "del/{id}")
     public String roledel(@PathVariable("id") Long id) {
-        if(id != null){
+        if (id != null) {
             this.userRepo.deleteById(id);
-
         }
         return "redirect:/user/list";
-
     }
-
 
 
 //    @Autowired

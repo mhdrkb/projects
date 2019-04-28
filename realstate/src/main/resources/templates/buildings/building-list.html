@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Building List</title>
     <script>
         $.noConflict();
         $(document).ready(function () {
@@ -41,6 +41,8 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Building List</h4>
+                        <a th:href="@{'/building/report'}" target="_blank">View Building List</a>
+                        <a th:href="@{'/building/pdf'}" target="_blank">Download Building List</a>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -98,7 +100,7 @@
                                     <td th:text="${buildings.otherDetailing}"></td>
                                     <td th:text="${buildings.registrationDate}"></td>
                                     <td th:text="${buildings.price}"></td>
-                                    <td><img th:src="@{${buildings.getFilePath()}}" width="100" height="100"/></td>
+                                    <td><img th:src="${buildings.getFilePath()}" width="100" height="100"/></td>
                                     <td>
                                         <a th:href="@{'/building/edit-building/'+${buildings.id}}"><i class="fa fa-edit"
                                                                                                       aria-hidden="true"></i>

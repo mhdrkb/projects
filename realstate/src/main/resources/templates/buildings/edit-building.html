@@ -37,7 +37,7 @@
                         <div class="card-title">Add Building</div>
                     </div>
                     <span th:class="succes" th:text="${successMsg}"></span>
-                    <form th:object="${building}" th:action="@{/building/add-building}" th:method="POST" enctype="multipart/form-data">
+                    <form th:object="${building}" th:action="@{/building/building-list}" th:method="POST" enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6 col-lg-4">

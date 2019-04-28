@@ -63,7 +63,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="user : ${list}">
+                                <tr th:each="user : ${userlist}">
                                     <td th:text="${user.firstName}"></td>
                                     <td th:text="${user.lastName}"></td>
                                     <td th:text="${user.userName}"></td>
@@ -72,7 +72,7 @@
                                     <td th:each="role : ${user.roles}">
                                         <span th:text="${role.roleName}"></span>
                                     </td>
-                                    <td><img th:src="@{${user.getFilePath()}}" width="100" height="100"/></td>
+                                    <td><img th:src="${user.getFilePath()}" width="100" height="100"/></td>
                                     <td>
                                         <a th:href="@{'/user/del/'+${user.id}}"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     </td>

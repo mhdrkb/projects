@@ -3,17 +3,13 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout.html}">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet" th:href="@{/css/maintablecss.css}"/>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script>
-        $.noConflict();
-        $(document).ready(function () {
-            $('#basic-datatables').DataTable({});
-        });
-    </script>
+    <title>FindHome Inc</title>
+    <!--<script>-->
+    <!--$.noConflict();-->
+    <!--$(document).ready(function () {-->
+    <!--$('#basic-datatables').DataTable({});-->
+    <!--});-->
+    <!--</script>-->
 </head>
 <body>
 <div class="content" layout:fragment="custom-content">
@@ -43,94 +39,40 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Building List</h4>
-                    </div>
                     <div class="card-body">
                         <div class="well well-sm">
                             <div class="btn-group">
                                 <a href="#" id="list" class="btn btn-default btn-sm"><span
-                                        class="glyphicon glyphicon-th-list">
-                            </span>List</a> <a href="#" id="grid" class="btn btn-default btn-sm"><span
-                                    class="glyphicon glyphicon-th"></span>Grid</a>
+                                        class="glyphicon glyphicon-th-list"></span>List</a>
+                                <a href="#" id="grid" class="btn btn-default btn-sm"><span
+                                        class="glyphicon glyphicon-th"></span>Grid</a>
                             </div>
                         </div>
-                        <div id="products" class="row list-group">
-                            <div class="item  col-xs-4 col-lg-4">
+                        <div class="container">
+                        <div id="products" class="row">
+                            <div class="item  col-xs-4 col-lg-4" th:each="b : ${list} ">
                                 <div class="thumbnail">
-                                    <img class="group list-group-image"
-                                         src="https://images.bproperty.com/w1024_h768/4/24161281_1867925_r.jpg"/>
+                                    <a th:href="@{'/building/edit-building/'+${b.id}}"><img class="group list-group-image" th:src="${b.filePath}"
+                                         alt=""/></a> <!--more images goes here-->
                                     <div class="caption">
-                                        <h4 class="group inner list-group-item-heading">
-                                            Product title</h4>
-                                        <p class="group inner list-group-item-text">
-                                            Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing
-                                            elit,
-                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                            volutpat.</p>
+                                        <h4 class="group inner list-group-item-heading" th:text="${b.buildingName}">
+                                        </h4>
+                                        <p class="group inner list-group-item-text" th:text="${b.streetAddress}">
+                                          </p>
                                         <div class="row">
                                             <div class="col-xs-12 col-md-6">
-                                                <p class="lead">
-                                                    $21.000</p>
+                                                <p class="lead" th:text="${b.price}">
+                                                    </p>
                                             </div>
                                             <div class="col-xs-12 col-md-6">
-                                                <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to
-                                                    cart</a>
+                                                <a class="btn btn-success" th:href="@{'/building/edit-building/'+${b.id}}">See More Details</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="item  col-xs-4 col-lg-4">
-                                <div class="thumbnail">
-                                    <img class="group list-group-image" src="https://images.bproperty.com/w1024_h768/4/24165121_1868423_r.jpg"
-                                         alt=""/>
-                                    <div class="caption">
-                                        <h4 class="group inner list-group-item-heading">
-                                            Product title</h4>
-                                        <p class="group inner list-group-item-text">
-                                            Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing
-                                            elit,
-                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                            volutpat.</p>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-6">
-                                                <p class="lead">
-                                                    $21.000</p>
-                                            </div>
-                                            <div class="col-xs-12 col-md-6">
-                                                <a class="btn btn-success" href="https://images.bproperty.com/w1024_h768/4/24165121_1868423_r.jpg">Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item  col-xs-4 col-lg-4">
-                                <div class="thumbnail">
-                                    <img class="group list-group-image" src="http://placehold.it/400x250/000/fff"
-                                         alt=""/>
-                                    <div class="caption">
-                                        <h4 class="group inner list-group-item-heading">
-                                            Product title</h4>
-                                        <p class="group inner list-group-item-text">
-                                            Product description... Lorem ipsum dolor sit amet, consectetuer adipiscing
-                                            elit,
-                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                            volutpat.</p>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-6">
-                                                <p class="lead">
-                                                    $21.000</p>
-                                            </div>
-                                            <div class="col-xs-12 col-md-6">
-                                                <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to
-                                                    cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
+                        </div>
                         </div>
                     </div>
 
