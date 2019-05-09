@@ -47,8 +47,8 @@ public class LoginController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    private static String USER_NAME = "mehedee45";  // GMail user name (just the part before "@gmail.com")
-    private static String PASSWORD = "9832640m_M"; // GMail password
+    private static String USER_NAME = "mahbubj2ee";  // GMail user name (just the part before "@gmail.com")
+    private static String PASSWORD = "J2ee01722"; // GMail password
 
 
 
@@ -105,7 +105,7 @@ public class LoginController {
 
             this.repo.save(user);
             //email sending
-            String appUrl = request.getScheme() + "://" + request.getServerName()+":"+"8008";
+            String appUrl = request.getScheme() + "://" + request.getServerName()+":"+"8084";
             String from = USER_NAME;
             String pass = PASSWORD;
             String[] to = {user.getEmail()}; // list of recipient email addresses
@@ -138,7 +138,7 @@ public class LoginController {
         MimeMessage message = new MimeMessage(session);
 
         try {
-            message.setFrom(new InternetAddress("mahbubj2ee@gmail.com", "phrma LLC."));
+            message.setFrom(new InternetAddress("mahbubj2ee@gmail.com", "Q-phrma Ltd."));
             InternetAddress[] toAddress = new InternetAddress[to.length];
 
             // To get the array of addresses

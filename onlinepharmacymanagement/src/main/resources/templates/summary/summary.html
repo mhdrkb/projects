@@ -7,10 +7,20 @@
 
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+
+        .mm {
+            text-align: center;
+        }
+    </style>
+
 </head>
 <body>
 <div layout:fragment="custom-content">
-    <h3><i class="fa fa-book"></i> Summary</h3>
+
+    <h3><i class="fa fa-book"></i> Summary Tables<br><br>
+        <a href="/report" target="_blank" class="fa fa-print">  HTML Report </a>
+        <a href="/pdf" target="_blank" class="fa fa-download">  PDF Download </a></h3>
     <div class="row mb">
         <!-- page start-->
         <div class="content-panel">
@@ -21,7 +31,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Drug_Name</th>
-                        <th>Drug_code</th>
+
                         <th>TotalQty</th>
                         <th>SoldQty</th>
                         <th>AvailableQty</th>
@@ -35,7 +45,7 @@
                     <tr class="gradeA" th:each="s : ${summarylist}">
                         <td th:text="${s.id}"></td>
                         <td th:text="${s.drugName}"></td>
-                        <td th:text="${s.drugCode}"></td>
+
 
                         <!--<td th:text="${s.drug.getBrands().getBrandName()}"></td>-->
 
